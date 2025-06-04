@@ -34,7 +34,16 @@ async function handleEvent(event) {
     'https://api.openai.com/v1/chat/completions',
     {
       model: 'gpt-3.5-turbo',
-      messages: [{ role: 'user', content: `宅建試験の勉強をサポートしてください。${userMessage}` }],
+      messages: [
+        {
+          role: 'system',
+          content: 'あなたは宅建士試験の学習アシスタントです。受験者の質問には正確でわかりやすい日本語で答えてください。「問題を出して」と言われた場合は、宅建試験の一問一答問題を1問出題し、答えと簡単な解説も加えてください。'
+        },
+        {
+          role: 'user',
+          content: userMessage
+        }
+      ],
       temperature: 0.7
     },
     {
